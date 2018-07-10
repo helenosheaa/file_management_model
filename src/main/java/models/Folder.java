@@ -11,13 +11,15 @@ public class Folder {
     private int id;
     private String title;
     private List<File> files;
+    private Owner owner;
 
     public Folder(){
 
     }
 
-    public Folder(String title){
+    public Folder(String title, Owner owner){
         this.title = title;
+        this.owner = owner;
     }
 
     @Id
@@ -40,7 +42,7 @@ public class Folder {
         this.title = title;
     }
 
-    @OneToMany(mappedBy = "folder", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "folder", fetch = FetchType.EAGER)
     public List<File> getFiles() {
         return files;
     }
@@ -48,4 +50,16 @@ public class Folder {
     public void setFiles(List<File> files){
         this.files = files;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "owner", nullable = false)
+    public Owner getOwner(){
+        return owner;
+    }
+
+    public void setOwner(Owner owner){
+        this.owner = owner;
+    }
+
+
 }
