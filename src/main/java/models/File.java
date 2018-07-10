@@ -62,7 +62,8 @@ public class File {
         this.size = size;
     }
 
-
+    @ManyToOne
+    @JoinColumn(name = "folder_id", nullable = false)
     public Folder getFolder(){
         return folder;
     }
